@@ -1,16 +1,13 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Commit 컨벤션
+| Type | 설명 | 비고 |
+| :--- | :--- | :--- |
+| **feat** | 새로운 기능 추가 | 사용자에게 보이는 기능 변화 |
+| **fix** | 버그 수정 | 기능 오류 해결 |
+| **design** | UI 디자인 변경 | CSS, 레이아웃, 아이콘 등 디자인 수정 |
+| **docs** | 문서 수정 | README.md, 주석, 위키 등 |
+| **style** | 코드 포맷 변경 | 세미콜론 누락, 코드 형식 등 (로직 변경 X) |
+| **refactor** | 코드 리팩토링 | 기능 변경 없이 코드 구조만 개선 |
+| **test** | 테스트 코드 추가/수정 | 테스트 파일 생성 및 보완 |
+| **chore** | 빌드 업무, 패키지 매니저 설정 | 라이브러리 설치, 설정 파일 변경 등 |
+| **perf** | 성능 개선 | 실행 속도나 메모리 최적화 |
+| **revert** | 이전 커밋 되돌리기 | 실수로 커밋한 내용을 취소할 때 |
