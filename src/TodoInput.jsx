@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-function ToDoList() {
+function ToDoList({ setTodoList, todoList }) {
   const [inputValue, setInputValue] = useState("");
-  const [todoList, setTodoList] = useState([]);
+
   const inputChange = (e) => {
     setInputValue(e.target.value);
   };
