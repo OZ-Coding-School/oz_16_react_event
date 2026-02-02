@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function ToDoList() {
   const [inputValue, setInputValue] = useState("");
@@ -7,10 +7,16 @@ function ToDoList() {
     setInputValue(e.target.value);
   };
 
-  const submitInput = () => {
+  const submitInput = (e) => {
     e.preventDefault();
-    setTodoList([...todoList, inputValue]);
+    setTodoList([
+      ...todoList,
+      { id: todoList.length, todo: inputValue, isComplete: false },
+    ]);
   };
+  useEffect(() => {
+    console.log(todoList);
+  }, [todoList]);
   return (
     <>
       <form onSubmit={submitInput}>
@@ -22,6 +28,11 @@ function ToDoList() {
         />
         <button type="submit">검색</button>
       </form>
+      <ul>
+        {todoList.map((list) => (
+          <li key={list.id}>{list.todo}</li>
+        ))}
+      </ul>
     </>
   );
 }
