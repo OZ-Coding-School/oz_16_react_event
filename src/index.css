@@ -2,18 +2,25 @@
 
 @layer base {
   html {
-    @apply bg-white text-black;
+    background-color: #ffffff;
+    color: #000000;
   }
 
   body {
-    @apply font-sans antialiased;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1 {
-    @apply text-2xl font-semibold;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
   }
 
   h2 {
-    @apply text-xl font-semibold;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
   }
 }
