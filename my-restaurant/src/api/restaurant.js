@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "http://localhost:3000";
 
 // 전체 맛집
 export const fetchPlaces = async () => {
