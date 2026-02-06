@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchPlaces } from "./api/restaurant";
-import PlaceCard from "./components/PlaceCard";
+import PlaceCard from "./components/PlaceCard.jsx";
 
 function App() {
   const [places, setPlaces] = useState([]);
