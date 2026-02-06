@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { fetchPlaces } from "./api/restaurant";
+import PlaceCard from "./components/PlaceCard";
 
 function App() {
-  const stores = Array.from({ length: 8 }, (_, i) => ({
-    id: i + 1,
-    name: `${i + 1}`,
-  }));
+  // 맛집 데이터, 로딩 상태 관리
+  const [stores, setStores] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // 데이터 가져오기
+  useEffect(() => {
+    fetchPlaces()
+      .then((data) => {
+        setStores(data.places || data);
+      })
+      .catch((error) => {
+        console.error("데이터 로딩 실패:", error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#0f0f10] text-zinc-100 p-6 md:p-12 font-sans">
@@ -15,53 +30,50 @@ function App() {
       </header>
 
       <main className="max-w-6xl mx-auto space-y-20">
-        {/* 찜한 맛집 */}
-        <section>
-          <div className="flex items-center gap-3 mb-8">
-            <span className="text-2xl">😋</span>
-            <h2 className="text-xl font-bold border-b-2 border-orange-500 pb-1">PICKED FAVORITES</h2>
+        {/* 로딩상태 조건부 렌더링 */}
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-40">
+            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p className="text-xl font-medium text-zinc-400">맛집을 불러오는 중입니다...</p>
           </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((num) => (
-              <div
-                key={num}
-                className="aspect-square rounded-2xl bg-zinc-900 border border-zinc-800 flex flex-col items-center justify-center group hover:border-orange-500/50 transition-all cursor-pointer shadow-xl"
-              >
-                <span className="text-zinc-700 font-bold group-hover:text-orange-500 transition-colors">
-                  SLOT {num}
-                </span>
+        ) : (
+          <>
+            {/* 찜한 맛집 */}
+            <section>
+              <div className="flex items-center gap-3 mb-8">
+                <span className="text-2xl">😋</span>
+                <h2 className="text-xl font-bold border-b-2 border-orange-500 pb-1">PICKED FAVORITES</h2>
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* 맛집 목록 */}
-        <section>
-          <div className="flex items-center gap-3 mb-8">
-            <span className="text-2xl">⭐</span>
-            <h2 className="text-xl font-bold border-b-2 border-zinc-700 pb-1">ALL STORES</h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stores.map((store) => (
-              <div
-                key={store.id}
-                className="bg-zinc-900/50 rounded-3xl border border-zinc-800 p-6 flex flex-col items-center shadow-lg hover:shadow-orange-500/5 transition-all"
-              >
-                <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-orange-600 to-amber-400 flex items-center justify-center text-3xl font-black shadow-inner mb-6">
-                  {store.name}
-                </div>
-
-                <h3 className="text-lg font-bold mb-6 text-zinc-300">맛집 리스트 {store.name}</h3>
-
-                <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-bold transition-colors shadow-lg shadow-orange-500/20">
-                  VIEW DETAIL
-                </button>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {[1, 2, 3, 4].map((num) => (
+                  <div
+                    key={num}
+                    className="aspect-square rounded-2xl bg-zinc-900 border border-zinc-800 flex flex-col items-center justify-center group hover:border-orange-500/50 transition-all cursor-pointer shadow-xl"
+                  >
+                    <span className="text-zinc-700 font-bold group-hover:text-orange-500 transition-colors">
+                      SLOT {num}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
+            </section>
+
+            {/* 맛집 목록 */}
+            <section>
+              <div className="flex items-center gap-3 mb-8">
+                <span className="text-2xl">⭐</span>
+                <h2 className="text-xl font-bold border-b-2 border-zinc-700 pb-1">ALL STORES</h2>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {stores.map((store) => (
+                  <PlaceCard key={store.id} place={store} />
+                ))}
+              </div>
+            </section>
+          </>
+        )}
       </main>
 
       <footer className="max-w-6xl mx-auto mt-32 py-10 border-t border-zinc-900 text-center text-zinc-600 text-xs">
