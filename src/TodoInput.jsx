@@ -26,7 +26,9 @@ function ToDoList({ setTodoList, todoList }) {
           value={inputValue}
           onChange={inputChange}
         />
-        <button type="submit">검색</button>
+        <button className="submit-button" type="submit">
+          검색
+        </button>
       </form>
       <ul>
         {todoList.map((list) => (
