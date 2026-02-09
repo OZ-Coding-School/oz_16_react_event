@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { useMemo } from "react";
 
 function EmptyState({ onCreate }) {
   return (
@@ -15,13 +16,20 @@ function EmptyState({ onCreate }) {
   );
 }
 
-function PostList({ posts }) {
+function PostList({ posts, onOpen }) {
   return (
-    <ul className="space-y-4">
+    <ul className="space-y-3">
       {posts.map((post) => (
-        <li key={post.id} className="border rounded p-4">
-          <h2 className="text-lg font-bold mb-2">{post.title}</h2>
-          <p className="text-sm text-gray-600">{post.content}</p>
+        <li
+          key={post.id}
+          onClick={() => onOpen(post.id)}
+          className="border border-black p-4 cursor-pointer
+                     hover:bg-gray-50 transition"
+        >
+          <h2 className="text-base font-medium">{post.title}</h2>
+          <p className="text-xs text-gray-500 mt-1">
+            {new Date(post.createdAt).toLocaleString()}
+          </p>
         </li>
       ))}
     </ul>
@@ -30,8 +38,15 @@ function PostList({ posts }) {
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const goCreate = () => navigate("/create");
 
   const [posts] = useLocalStorage("posts", []);
+
+  const sortedPosts = useMemo(() => {
+    return [...posts].sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0));
+  }, [posts]);
+
+  const hasPosts = sortedPosts.length > 0;
 
   return (
     <section className="space-y-6">
@@ -49,12 +64,14 @@ export default function HomePage() {
         )}
       </header>
 
-      {posts.length === 0 ? (
-        <EmptyState onCreate={() => navigate("/create")} />
+      {hasPosts ? (
+        <PostList
+          posts={sortedPosts}
+          onOpen={(id) => navigate(`/posts/${id}`)}
+        />
       ) : (
-        <PostList posts={posts} />
+        <EmptyState onCreate={goCreate} />
       )}
     </section>
-
   );
 }
