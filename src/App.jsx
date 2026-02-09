@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ToDoList from "./TodoInput";
-import CeckList from "./CeckList";
+import CeckList from "./CheckList";
 import Filter from "./filter";
 
 function App() {

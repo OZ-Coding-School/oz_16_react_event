@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 function ToDoList({ setTodoList, todoList }) {
   const [inputValue, setInputValue] = useState("");
 
-  const inputChange = (e) => {
+  const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  const submitInput = (e) => {
+  const handleInputSubmit = (e) => {
     e.preventDefault();
     setTodoList([
       ...todoList,
@@ -19,12 +19,12 @@ function ToDoList({ setTodoList, todoList }) {
   }, [todoList]);
   return (
     <>
-      <form onSubmit={submitInput}>
+      <form onSubmit={handleInputSubmit}>
         <input
           type="text"
           placeholder="투두리스트"
           value={inputValue}
-          onChange={inputChange}
+          onChange={handleInputChange}
         />
         <button className="submit-button" type="submit">
           검색
