@@ -1,0 +1,68 @@
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f6f7e7;
+  font-family: "Gaegu", sans-serif;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  padding: 20px 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button {
+  font-family: "Gaegu", sans-serif;
+  background-color: #ffbf00;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #ffc933;
+}
+
+.edit-button {
+  font-family: "Gaegu", sans-serif;
+  background-color: #ffbf00;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: all 0.2s ease;
+}
+
+.submit-button {
+  font-family: "Gaegu", sans-serif;
+  background-color: #fbd900;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: all 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: #ffee33;
+}
+
+.carrot-icon {
+  width: 100px;
+  height: 100px;
+}
+
+h1 {
+  font-size: 50px;
+}
