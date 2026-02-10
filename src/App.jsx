@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import TodoInput from "./TodoInput.jsx";
+import TodoList from "./todoList.jsx";
 
 // 투두리스트 데이터 관리
 function App() {
@@ -13,13 +14,7 @@ function App() {
   return (
     <div className="App">
       <h1>TodoList</h1>
-      <TodoInput setTodos={setTodos} todos={todos} />{" "}
-      {/* setTodos를 TodoInput에 넘김 */}
-      <ul>
-        {todos.map((item) => (
-          <li key={item.id}>{item.todo}</li>
-        ))}
-      </ul>
+      <TodoList todos={todos} setTodos={setTodos} />
     </div>
   );
 }
