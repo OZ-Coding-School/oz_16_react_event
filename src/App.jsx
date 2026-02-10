@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ToDoList from "./TodoInput";
-import CeckList from "./CheckList";
+import CheckList from "./CheckList";
 import Filter from "./filter";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
         <div>
           <h1>ToDoList</h1>
 
-          <CeckList todoList={todoList} setTodoList={setTodoList} />
+          <CheckList todoList={todoList} setTodoList={setTodoList} />
           <Filter
             selectedFilterId={selectedFilterId}
             setSelectedFilterId={setSelectedFilterId}
