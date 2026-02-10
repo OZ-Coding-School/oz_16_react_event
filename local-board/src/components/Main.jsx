@@ -33,7 +33,13 @@ export default function Main({ posts }) {
             return (
               <div
                 key={post.id}
-                onClick={() => navigate(`/post/${post.id}`)}
+                onClick={() =>
+                  navigate(`/post/${post.id}`, {
+                    state: {
+                      post: post
+                    }
+                  })
+                }
                 className="rounded-2xl overflow-hidden bg-white/5 backdrop-blur-xl ring ring-white/10 shadow-[0_8px_20px_rgba(0,0,0,0.35)] transition-all duration-300 hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] cursor-pointer flex flex-col h-[420px]"
               >
                 {post.images && post.images.length > 0 && (

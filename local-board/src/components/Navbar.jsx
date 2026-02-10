@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "./Button";
 
 export default function Navbar() {
   const navigate = useNavigate(); //페이지 이동
-  const handleLoginClick = () => {
-    navigate("login");
-  };
 
   const handleCreateClick = () => {
     navigate("post/create");
@@ -29,38 +27,16 @@ export default function Navbar() {
             text-transparent
           "
         >
-          Local Board
+          <Link to="/"> Local Board</Link>
         </h1>
         <div className="flex items-center gap-3 [&_button]:cursor-pointer">
           {/* 글쓰기 버튼 */}
-          <button
+          <Button
             onClick={handleCreateClick}
-            className="w-fit px-3 py-1 bg-green-600 rounded-lg hover:bg-green-700"
+            className="w-fit hover:bg-green-700 py-1 px-3"
           >
             글쓰기
-          </button>
-
-          <button
-            className="w-8 h-8 flex items-center justify-center rounded-full transition cursor-pointer"
-            aria-label="toggle dark mode"
-          >
-            🌙
-          </button>
-          {/* 로그인 */}
-          <button
-            onClick={handleLoginClick}
-            className="
-              font-medium
-              px-2 py-1
-              rounded-md
-              hover:text-[#7CFF6B]
-              hover:bg-white/5
-              transition
-              cursor-pointer
-            "
-          >
-            Login
-          </button>
+          </Button>
         </div>
       </nav>
     </>

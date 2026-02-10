@@ -32,7 +32,7 @@ export default function PostCreate({ addPost }) {
   };
 
   // react-dropzone 단계에서 이미 컷된 경우 내용
-  const onDropRejected = () => {
+  const handleOnDropRejected = () => {
     alert(
       `이미지는 최대 ${MAX_IMAGES}장까지 첨부할 수 있어요. 다시 선택해주세요`
     );
@@ -41,7 +41,7 @@ export default function PostCreate({ addPost }) {
   // dropzone 설정 (입력 처리 + 1차 필터)
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop: addImages, // 정상 케이스
-    onDropRejected, // 초과 케이스
+    onDropRejected: handleOnDropRejected, // 초과 케이스
     maxFiles: MAX_IMAGES, // 1차 개수 제한
     accept: {
       "image/*": [".jpeg", ".jpg", ".png"] // 이미지 파일만 허용
