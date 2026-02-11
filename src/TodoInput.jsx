@@ -1,12 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+function generateId() {
+  return `${Date.now()}_${Math.floor(Math.random() * 10000)}`;
+}
 
 function TodoInput({ setTodos, todos }) {
   const [inputValue, setInputValue] = useState("");
-  const newArr = [
-    ...todos,
-    { id: todos.length, todo: inputValue, isComplete: false },
-  ];
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -14,21 +14,32 @@ function TodoInput({ setTodos, todos }) {
 
   const handleAddClick = () => {
     if (inputValue.trim() === "") return;
+    const newTodo = {
+      id: generateId(),
+      todo: inputValue,
+      isComplete: false,
+    };
 
-    setTodos(newArr);
+    setTodos([...todos, newTodo]);
 
     setInputValue("");
   };
 
   return (
-    <div className="todo-input">
+    <div className="flex gap-2 p-4 bg-white rounded-t-lg shadow-sm">
       <input
+        className="flex-grow border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         type="text"
         value={inputValue}
         onChange={handleInputChange}
         placeholder="할 일을 입력하세요"
       />
-      <button onClick={handleAddClick}>등록</button>
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+        onClick={handleAddClick}
+      >
+        등록
+      </button>
     </div>
   );
 }

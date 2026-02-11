@@ -1,29 +1,30 @@
 import React from "react";
-import { useState } from "react";
 
-function TodoList() {
-  const [todoList, setTodoList] = useState([
-    { id: 0, todo: "밥먹기", isComplete: false },
-    { id: 1, todo: "공부하기", isComplete: true },
-    { id: 2, todo: "청소하기", isComplete: false },
-  ]);
+function TodoList({ todos, setTodos }) {
+  const toggleCheckbox = (id) => {
+    const newArr = todos.map((item) => {
+      if (item.id === id) {
+        return { ...item, isComplete: !item.isComplete };
+      }
+      return item;
+    });
 
-  const toggleCheckbox = (index) => {
-    const newArr = [...todoList];
-    newArr[index].isComplete = !newArr[index].isComplete;
-    setTodoList(newArr);
+    setTodos(newArr);
   };
 
   return (
-    <ul>
-      {todoList.map((item, index) => (
-        <li key={item.id}>
+    <ul className="mt-4 space-y-2">
+      {todos.map((item) => (
+        <li key={item.id} className="flex items-center gap-2 p-2 border-b">
           <input
             type="checkbox"
+            className="w-5 h-5 cursor-pointer"
             checked={item.isComplete}
-            onChange={() => toggleCheckbox(index)}
+            onChange={() => toggleCheckbox(item.id)}
           />
-          <span>{item.todo}</span>
+          <span className={item.isComplete ? "line-through text-gray-400" : ""}>
+            {item.todo}
+          </span>
         </li>
       ))}
     </ul>
