@@ -27,9 +27,8 @@ function PostList({ posts, onOpen }) {
                      hover:bg-gray-50 transition"
         >
           <h2 className="text-base font-medium">{post.title}</h2>
-          <p className="text-xs text-gray-500 mt-1">
-            {new Date(post.createdAt).toLocaleString()}
-          </p>
+          <p className="text-xs text-gray-500 mt-1">{post.date}</p>
+
         </li>
       ))}
     </ul>
@@ -43,7 +42,7 @@ export default function HomePage() {
   const [posts] = useLocalStorage("posts", []);
 
   const sortedPosts = useMemo(() => {
-    return [...posts].sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0));
+    return [...posts].sort((a, b) => b.date.localeCompare(a.date));
   }, [posts]);
 
   const hasPosts = sortedPosts.length > 0;
